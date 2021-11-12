@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form [formGroup]="userForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <input matInput formControlName="userName" name="userName" type="text" placeholder="User name">
+        <!-- <mat-error *ngIf="userNameInput.invalid">Please enter a valid user name.</mat-error> -->
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="password" type="password" name="password" matInput placeholder="Password">
+        <!-- <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error> -->
+      </mat-form-field>
+      <button
+        mat-raised-button 
+        color="accent" 
+        type="button" 
+        *ngIf="!isLoading"
+        (click)="onUpdate(user.id)"
+      >Update</button>
+      <button 
+        mat-raised-button 
+        color="accent" 
+        type="button" 
+        *ngIf="!isLoading"
+        (click)="onDelete(user.id)"
+       >Delete</button>
+    </form>
+</mat-card>

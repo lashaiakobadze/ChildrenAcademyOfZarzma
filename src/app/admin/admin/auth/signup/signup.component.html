@@ -1,0 +1,22 @@
+<mat-card>
+  <h2>Signup new user</h2>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput name="userName" ngModel type="text" placeholder="User name" #userNameInput="ngModel" required>
+      <mat-error *ngIf="userNameInput.invalid">Please enter a valid user name.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
+      <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Signup</button>
+  </form>
+</mat-card>
+
+<hr>
+
+<h2>Update and delete users</h2>
+<div class="users">
+  <app-users *ngFor="let user of users" [user]="user"></app-users>
+</div>

@@ -1,0 +1,104 @@
+<mat-card>
+    <h2>Create new student's account</h2>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form [formGroup]="studentform" (submit)="onAddStudent()" *ngIf="!isLoading">
+        <mat-form-field>
+        <input matInput type="text" formControlName="firstName" placeholder="First Name">
+        <mat-error *ngIf="studentform.get('firstName').invalid">Please enter a post First Name.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="text" formControlName="lastName" placeholder="Last Name">
+            <mat-error *ngIf="studentform.get('lastName').invalid">Please enter a post lastName.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="number" formControlName="personalNumber" placeholder="Personal Number">
+            <mat-error *ngIf="studentform.get('personalNumber').invalid">Please enter a post personalNumber.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="text" formControlName="phoneNumber" placeholder="PhoneNumber">
+            <mat-error *ngIf="studentform.get('phoneNumber').invalid">Please enter a post phoneNumber.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="email" formControlName="email" placeholder="E-Mail">
+            <mat-error *ngIf="studentform.get('email').invalid">Please enter a post email.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="text" formControlName="schoolName" placeholder="School Name">
+            <mat-error *ngIf="studentform.get('schoolName').invalid">Please enter a post schoolName.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="text" formControlName="parentFullName" placeholder="Parent Full Name">
+            <mat-error *ngIf="studentform.get('parentFullName').invalid">Please enter a post parentFullName.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="text" formControlName="code" placeholder="Student Code">
+            <mat-error *ngIf="studentform.get('code').invalid">Please enter a post code.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 50%; margin-bottom: 5px;">
+          <mat-label>Class</mat-label>
+          <select matNativeControl formControlName="schoolClass">
+            <ng-container *ngFor="let classe of classes">
+                <option [value]="classe">{{ classe }}</option>
+              </ng-container>
+          </select>
+        </mat-form-field>
+
+        <label id="example-radio-group-label">Student status</label>
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            formControlName="active">
+            <mat-radio-button class="example-radio-button" *ngFor="let status of statuses" [value]="status">
+                {{status}}
+            </mat-radio-button>
+        </mat-radio-group>
+
+        <button mat-raised-button color="accent" type="submit">Add Student</button>
+    </form>
+</mat-card>
+
+<mat-divider></mat-divider>
+
+<h2>Update and delete students</h2>
+
+<mat-tab-group>
+    <mat-tab label="Class 6">
+      <ng-template matTabContent>
+        <div class="students">
+          <div *ngFor="let student of students" >
+            <app-students [student]="student" *ngIf="student.schoolClass == 6"></app-students>
+          </div>
+        </div>
+        <!-- Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}} -->
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Class 7">
+      <ng-template matTabContent>
+        <div class="students">
+          <div *ngFor="let student of students" >
+            <app-students [student]="student" *ngIf="student.schoolClass == 7"></app-students>
+          </div>
+        </div>
+        <!-- Content 2 - Loaded: {{getTimeLoaded(2) | date:'medium'}} -->
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Class 8">
+      <ng-template matTabContent>
+        <div class="students">
+          <div *ngFor="let student of students" >
+            <app-students [student]="student" *ngIf="student.schoolClass == 8"></app-students>
+          </div>
+        </div>
+        <!-- Content 3 - Loaded: {{getTimeLoaded(3) | date:'medium'}} -->
+      </ng-template>
+    </mat-tab>
+</mat-tab-group>
+  
